@@ -10,17 +10,16 @@ export class Persona {
     private Donacion: number;
     @Column()
     private Mail: string;
-    @Column()
-    private Mensaje: string;
+    
 
-    constructor(id: number, NombreApellido: string, Donacion: number, Mail: string, Mensaje: string) {
+    constructor(id: number, NombreApellido: string, Donacion: number, Mail: string) {
         this.idpersona = id;
         this.NombreApellido = NombreApellido;
         this.idpersona = id;
         this.NombreApellido = NombreApellido;
         this.Donacion = Donacion;
         this.Mail = Mail;
-        this.Mensaje = Mensaje;
+        
     }
 
     public getIdpersona(): number { return this.idpersona; }
@@ -32,6 +31,5 @@ export class Persona {
     public setDonacion(Donacion: number): void { this.Donacion = Donacion; }
     public getMail(): string { return this.Mail; }
     public setMail(Mail: string): void { this.Mail = Mail; }
-    public getMensaje(): string { return this.Mensaje; }
-    public setMensaje(Mensaje: string): void { this.Mensaje = Mensaje; }
+    
 }
