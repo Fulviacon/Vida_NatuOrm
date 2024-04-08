@@ -7,8 +7,13 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { PersonaController } from './persona/persona.controller';
 import { PersonaService } from './persona/persona.service';
+import { DonacionesModule } from './donaciones/donaciones.module';
+import { DonacionesController } from './donaciones/donaciones.controller';
+import { DonacionesService } from './donaciones/donaciones.service';
+import { MensajeController } from './mensaje/mensaje.controller';
+import { MensajeModule } from './mensaje/mensaje.module';
+import { MensajeService } from './mensaje/mensaje.service';
 
- 
 @Module ({
   imports: [
     TypeOrmModule.forRoot({
@@ -19,9 +24,12 @@ import { PersonaService } from './persona/persona.service';
       "password": "root",
       "database": "vida_natural",
       "entities": ["dist/**/**.entity.js"],
-      "synchronize": false
+      "synchronize": true
         }),
     PersonaModule,
+    DonacionesModule,
+    MensajeModule,
+    
   ],
   controllers: [AppController],
   providers: [AppService],

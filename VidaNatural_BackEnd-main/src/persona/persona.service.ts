@@ -1,16 +1,37 @@
 //import { Injectable, NotFoundException, BadRequestException, ConflictException } from "@nestjs/common";
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { FindOneOptions, Repository } from 'typeorm';
 import { Persona } from 'src/entities/persona.entity';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
 
 @Injectable()
 export class PersonaService {
   constructor(
     @InjectRepository(Persona)
-    private readonly personaRepository: Repository<Persona>,
+    private readonly personasRepository: Repository<Persona>
   ) {}
+  
+  public async getAll(): Promise<Persona[]>{// este mét permite obtener todos los registros
+    return await this.personasRepository.find();//de una tabla
+  }
+  
+  public async getById(id : number) : Promise<Persona> {
+    //este mét obtienele registro específico
+    try{  
+    const criterio : FindOneOptions = { where: { idPersona: id } }// de una tabla
+    let persona : Persona = await this.personasRepository.findOne( criterio );
+    if (persona)
+        return persona;
+  throw new Error('la persona no se encuentra');
+}catch (error) {
+  throw new HttpException({status:HttpStatus.NOT_FOUND,
+      error: 'Error en la búsqueda de persona ' + id + ' : ' + error.message,
+    },
+    HttpStatus.NOT_FOUND,
+  );
+}
+}
 }
   //async getPersonas(): Promise<PersonaDto[]> {
    // try {

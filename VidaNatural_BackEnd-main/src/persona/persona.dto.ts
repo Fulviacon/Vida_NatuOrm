@@ -1,19 +1,15 @@
-import { IsString, IsInt, IsOptional } from 'class-validator';
+import { IsString, IsEmail, IsOptional } from 'class-validator';
 
 export class PersonaDto {
   @IsString()
   nombreApellido: string;
 
-  @IsString()
+  @IsEmail()
   email: string;
 
-  @IsInt()
-  donacion: number;
-
-  @IsString()
-  mensaje: string;
-
   @IsOptional()
-  @IsInt()
+  //@IsInt()
   id?: number;
 }
+
+
