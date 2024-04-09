@@ -6,18 +6,16 @@ export class Persona {
     private idpersona: number;
     @Column()
     private NombreApellido: string;
-    @Column()
-    private Donacion: number;
+    
     @Column()
     private Mail: string;
     
 
-    constructor(id: number, NombreApellido: string, Donacion: number, Mail: string) {
+    constructor(id: number, NombreApellido: string, Mail: string) {
         this.idpersona = id;
         this.NombreApellido = NombreApellido;
         this.idpersona = id;
         this.NombreApellido = NombreApellido;
-        this.Donacion = Donacion;
         this.Mail = Mail;
         
     }
@@ -27,8 +25,7 @@ export class Persona {
 
     public getNombreApellido(): string { return this.NombreApellido; }
     public setNombreApellido(NombreApellido:string):void { this.NombreApellido = NombreApellido}
-    public getDonacion(): number { return this.Donacion; }
-    public setDonacion(Donacion: number): void { this.Donacion = Donacion; }
+    
     public getMail(): string { return this.Mail; }
     public setMail(Mail: string): void { this.Mail = Mail; }
     

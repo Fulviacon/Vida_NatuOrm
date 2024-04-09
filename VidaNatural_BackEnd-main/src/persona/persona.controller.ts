@@ -10,7 +10,7 @@ import {
   HttpStatus,
   ParseIntPipe,
 } from '@nestjs/common';
-import { PersonaService } from './persona.service';
+import { PersonaService } from "./persona.dto";
 import { PersonaDto } from './persona.dto';
 
 @Controller()
