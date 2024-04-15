@@ -6,7 +6,7 @@ import { AppService } from './app.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { PersonaController } from './persona/persona.controller';
-import { PersonaService } from "./persona/persona.dto";
+
 import { DonacionesModule } from './donaciones/donaciones.module';
 import { DonacionesController } from './donaciones/donaciones.controller';
 import { DonacionesService } from './donaciones/donaciones.service';
@@ -23,11 +23,10 @@ import { MensajeService } from './mensaje/mensaje.service';
       "username": "root",
       "password": "root",
       "database": "vida_natural",
-      "entities": ["dist/**/**.entity.js"],
+      "entities": [__dirname + "/entity/*{.js,.ts}"],
       "synchronize": true
         }),
-    PersonaModule,
-    DonacionesModule,
+    PersonaModule,    DonacionesModule,
     MensajeModule,
     
   ],

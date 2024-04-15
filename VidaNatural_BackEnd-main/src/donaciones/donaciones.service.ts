@@ -7,6 +7,9 @@ import { DonacionesDto } from './donaciones.dto';
 @Injectable()//Se define un servicio llamado DonacionesService con la anotación 
 //@Injectable() que indica que esta clase es un servicio inyectable.
 export class DonacionesService {
+    updateDonaciones(donaciones: DonacionesDto): any {
+        throw new Error('Method not implemented.');
+    }
   private donaciones: Donaciones[]=[];//Se utiliza @InjectRepository(Donaciones) para inyectar el repositorio de TypeORM 
   //para la entidad Donaciones en el constructor del servicio.
   constructor(

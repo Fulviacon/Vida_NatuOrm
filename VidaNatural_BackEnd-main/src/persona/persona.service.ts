@@ -7,6 +7,21 @@ import { PersonaDto } from "./persona.dto";
 
 @Injectable()
 export class PersonaService {
+  updatePersona(persona: PersonaDto): Persona | PromiseLike<Persona> {
+    throw new Error('Method not implemented.');
+  }
+  updatePersonById(id: number, PersonaDto: PersonaDto): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
+  deletePersonaByID(id: number) {
+    throw new Error('Method not implemented.');
+  }
+  getPersonaById(id: number): any {
+    throw new Error('Method not implemented.');
+  }
+  getPersonas(): PersonaDto[] | PromiseLike<PersonaDto[]> {
+    throw new Error('Method not implemented.');
+  }
   private personas: Persona[] = [];
   constructor(
     @InjectRepository(Persona)

@@ -1,4 +1,27 @@
-import {
+import { Body, Controller, Put } from '@nestjs/common';
+
+@Controller('persona')
+export class PersonaController {
+constructor(private readonly personaService: PersonaService) {}  
+
+  @Put()
+  async actualizarPersona(@Body() persona: PersonaDto): Promise<Persona> {
+    return await this.personaService.updatePersona(persona);
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+//import {
   Controller,
   Get,
   Param,
@@ -6,58 +29,47 @@ import {
   Body,
   Delete,
   Put,
-  HttpCode,
   HttpStatus,
   ParseIntPipe,
 } from '@nestjs/common';
-import { PersonaService } from "./persona.dto";
 import { PersonaDto } from './persona.dto';
+import { Persona } from 'src/entities/persona.entity';
+import { PersonaService } from './persona.service';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
-@Controller()
-export class PersonaController {
-  constructor(private readonly personaService: PersonaService) {}
-  @Get('/personas')
-  @HttpCode(202)
-  async getPersonas(): Promise<PersonaDto[]> {
-    return this.personaService.getPersonas();
-  }
+//@Controller('personas')
+//export class PersonaController {
+//  constructor(
+ //   private readonly personaService: PersonaService,
+//    @InjectRepository(Persona)
+//    private readonly personaRepository: Repository<Persona>,
+//  ) {}
 
-  @Get('/personas/:id')
-  async getPersonaById(
-    @Param(
-      'id',
-      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
-    )
-    id: number,
-  ): Promise<any> {
-    return this.personaService.getPersonaById(id);
-  }
-  @Post('/personas/')
-  @HttpCode(201)
-  createPersona(@Body() PersonaDto: PersonaDto): Promise<any> {
-    return this.personaService.createPersona(PersonaDto);
-  }
-  @Delete('/personas/:id')
-  @HttpCode(200)
-  deletePersonaByID(
-    @Param(
-      'id',
-      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
-    )
-    id: number,
-  ) {
-    return this.personaService.deletePersonaByID(id);
-  }
-  @Put('/personas/:id')
-  @HttpCode(204)
-  updatePersonById(
-    @Param(
-      'id',
-      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
-    )
-    id: number,
-    @Body() PersonaDto: PersonaDto,
-  ): Promise<void> {
-    return this.personaService.updatePersonById(id, PersonaDto);
-  }
-}
+//  @Get()
+//  async getPersonas(): Promise<Persona[]> {
+ //   return await this.personaRepository.find();
+ // }
+
+ //@Get(':id')
+ // async getPersonaById(@Param('id', ParseIntPipe) id: number): Promise<Persona> {
+ //   return await this.personaService.getPersonaById(id);
+
+  //@Post()
+ // async addPersona(@Body() personaDto: PersonaDto): Promise<Persona> {
+ //   return await this.personaRepository.save(personaDto);
+ // }
+
+ // @Delete(':id')
+ // async deletePersonaByID(@Param('id', ParseIntPipe) id: number): Promise<void> {
+ //   await this.personaRepository.delete(id);
+ // }
+
+  //@Put(':id')
+  //async updatePersonById(
+  //  @Param('id', ParseIntPipe) id: number,
+  //  @Body() personaDto: PersonaDto,
+  //): Promise<void> {
+   // await this.personaRepository.update(id, PersonaDto);
+  //}
+//}

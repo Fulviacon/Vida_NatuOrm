@@ -5,6 +5,9 @@ import { Mensaje } from 'src/entities/mensajes.entity';
 
 @Injectable()
 export class MensajeService {
+  updateMensaje(donaciones: any): Mensaje | PromiseLike<Mensaje> {
+      throw new Error('Method not implemented.');
+  }
   constructor(
     @InjectRepository(Mensaje)
     private readonly mensajesRepository: Repository<Mensaje>

@@ -1,22 +1,22 @@
-import { Entity, PrimaryColumn, Column } from 'typeorm';
+import { Entity, PrimaryColumn, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('Persona')
 export class Persona {
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
     private idpersona: number;
     @Column()
     private NombreApellido: string;
     
     @Column()
-    private Mail: string;
+    private Email: string;
     
 
-    constructor(id: number, NombreApellido: string, Mail: string) {
+    constructor(id: number, NombreApellido: string, Email: string) {
         this.idpersona = id;
         this.NombreApellido = NombreApellido;
         this.idpersona = id;
         this.NombreApellido = NombreApellido;
-        this.Mail = Mail;
+        this.Email = Email;
         
     }
 
@@ -26,7 +26,7 @@ export class Persona {
     public getNombreApellido(): string { return this.NombreApellido; }
     public setNombreApellido(NombreApellido:string):void { this.NombreApellido = NombreApellido}
     
-    public getMail(): string { return this.Mail; }
-    public setMail(Mail: string): void { this.Mail = Mail; }
+    public getMail(): string { return this.Email }
+    public setMail(Email: string): void { this.Email = Email }
     
 }
