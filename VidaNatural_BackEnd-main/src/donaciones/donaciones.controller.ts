@@ -10,6 +10,8 @@ export class DonacionesController {
   @Put()
   async actualizarDonaciones(@Body() donaciones: DonacionesDto): Promise<Donaciones> {
     return await this.donacionesService.updateDonaciones(donaciones);
+
+  
   }
 }
 
