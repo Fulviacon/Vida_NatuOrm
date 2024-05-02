@@ -1,33 +1,24 @@
-import { Entity, PrimaryColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Persona } from './persona.entity';
 
-@Entity('Donaciones')
+@Entity('donaciones')
 export class Donaciones {
-    @PrimaryColumn()
-    private idDonaciones: number;
+    @PrimaryGeneratedColumn()
+    id: number;
+
     @Column()
-    private montosDonados: number;
-    @Column({type:'datetime', default:() => 'CURRENT_TIMESTAMP'})
-    createdAt:Date
-    private fechaDonacion: Date;
-    
-    
+    monto: number;
 
-    constructor(id: number, MontosDonados: number, FechaDonacion: Date) {
-        this.idDonaciones = id;
-        this.montosDonados = MontosDonados;
-        this.fechaDonacion = FechaDonacion;
-        
-        
+    @Column()
+    fechaDonacion: Date;
+    
+    @ManyToOne(() => Persona, persona => persona.donaciones)
+    @JoinColumn({ name: 'idPersona' })
+    persona: Persona;
+
+    constructor(monto: number, fechaDonacion: Date,persona:Persona) {
+        this.monto = monto;
+        this.fechaDonacion = fechaDonacion;
+        this.persona = persona
     }
-
-    public getIdDonaciones(): number { return this.idDonaciones; }
-    public setIdDonaciones(idpersona: number): void { this.idDonaciones = this.idDonaciones; }
-
-    public getmontosDonados(): number { return this.montosDonados; }
-    public setmontosDonados(MontosDonados:number):void { this.montosDonados = MontosDonados}
-
-    public getfechaDonacion(): Date { return this.fechaDonacion; }
-    public setfechaDonacion(Donacion: Date): void { this.fechaDonacion = Donacion; }
-   
-    
 }

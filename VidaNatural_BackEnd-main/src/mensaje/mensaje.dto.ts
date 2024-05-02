@@ -1,10 +1,10 @@
-import { IsInt, IsOptional } from 'class-validator';
+import { IsInt, IsOptional, IsString } from 'class-validator';
+import { Persona } from 'src/entities/persona.entity';
 
 export class MensajeDto {
-  @IsInt()
-  idPersona: number;
+ 
+  @IsString()
+  mensaje:string;
 
-  @IsOptional()
-  @IsInt()
-  id?: number;
+persona:Persona;
 }

@@ -1,19 +1,23 @@
-import { Entity, PrimaryColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Persona } from './persona.entity';
 
-@Entity ('Mensaje')
+@Entity('mensaje')
 export class Mensaje {
-    @PrimaryColumn()
-    private idMensaje: number;
-   
+    @PrimaryGeneratedColumn()
+    id: number;
 
-    constructor(idMensaje: number) {
-        this.idMensaje = idMensaje;
-         
-        
-    }
+    @Column()
+    mensaje: string;
 
-    public getIdMensaje(): number { return this.idMensaje; }
-    public setIdMensaje(idpersona: number): void { this.idMensaje = this.idMensaje; }
+    @ManyToOne(() => Persona, persona => persona.mensaje)
+    @JoinColumn({ name: 'idPersona' })
+    persona: Persona;
 
     
+
+    
+    constructor(mensaje: string,persona:Persona) {
+        this.mensaje = mensaje;
+        this.persona=persona
+    }
 }
