@@ -1,75 +1,49 @@
-import { Body, Controller, Put } from '@nestjs/common';
-
-@Controller('persona')
-export class PersonaController {
-constructor(private readonly personaService: PersonaService) {}  
-
-  @Put()
-  async actualizarPersona(@Body() persona: PersonaDto): Promise<Persona> {
-    return await this.personaService.updatePersona(persona);
-  }
-
-}
-
-
-
-
-
-
-
-
-
-
-
-//import {
-  Controller,
-  Get,
-  Param,
-  Post,
-  Body,
-  Delete,
-  Put,
-  HttpStatus,
-  ParseIntPipe,
-} from '@nestjs/common';
-import { PersonaDto } from './persona.dto';
+import { Controller, Get, Param, Post, Body, Delete, Put, HttpCode,  HttpStatus,  ParseIntPipe, HttpException,} from '@nestjs/common';
+import { PersonaDTO } from './persona.dto';
 import { Persona } from 'src/entities/persona.entity';
 import { PersonaService } from './persona.service';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 
-//@Controller('personas')
-//export class PersonaController {
-//  constructor(
- //   private readonly personaService: PersonaService,
-//    @InjectRepository(Persona)
-//    private readonly personaRepository: Repository<Persona>,
-//  ) {}
 
-//  @Get()
-//  async getPersonas(): Promise<Persona[]> {
- //   return await this.personaRepository.find();
- // }
+@Controller('personas')
+export class PersonaController {
+  constructor(private readonly personaService: PersonaService) {}
+  //trae todas las personas
+  @Get()
+  @HttpCode(200)
+  async getPersonas(): Promise<Persona[]> {
+    return await this.personaService.getPersona();
+  }
 
- //@Get(':id')
- // async getPersonaById(@Param('id', ParseIntPipe) id: number): Promise<Persona> {
- //   return await this.personaService.getPersonaById(id);
+//trae una persona por id
+  @Get(':id')
+  async getPersonaById(@Param('id', new ParseIntPipe()) id: number): Promise<Persona> {
+    const persona = await this.personaService.getByIdPersona(id);
+    if (persona) return persona;
+   }
 
-  //@Post()
- // async addPersona(@Body() personaDto: PersonaDto): Promise<Persona> {
- //   return await this.personaRepository.save(personaDto);
- // }
+//crea una persona
+  @Post()
+  @HttpCode(201)
+  async crearPersona(@Body() PersonaDto: PersonaDTO): Promise<Persona> {
+    return await this.personaService.crearPersona(PersonaDto);
+  }
 
- // @Delete(':id')
- // async deletePersonaByID(@Param('id', ParseIntPipe) id: number): Promise<void> {
- //   await this.personaRepository.delete(id);
- // }
+  //borra una persona
 
-  //@Put(':id')
-  //async updatePersonById(
-  //  @Param('id', ParseIntPipe) id: number,
-  //  @Body() personaDto: PersonaDto,
-  //): Promise<void> {
-   // await this.personaRepository.update(id, PersonaDto);
-  //}
-//}
+  @Delete(':id')
+  @HttpCode(200)
+  async deletePersonaByID( @Param( 'id', new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )  id: number, datos:PersonaDTO ):Promise<string> {
+   return await this.personaService.deletePersona(id,datos);
+   
+  }
+
+  //modifcica datos existentes
+  @Put(':id')
+  async updatePersonById(@Param('id', new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })
+) id: number, @Body() personaDto: PersonaDTO ): Promise<Persona> {
+      return await this.personaService.updatePersona(id, personaDto);
+    
+  }
+}
+

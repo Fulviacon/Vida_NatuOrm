@@ -1,17 +1,18 @@
-import { IsString, IsEmail, IsOptional } from 'class-validator';
+import { IsString, IsEmail } from 'class-validator';
 
-export class PersonaDto {
+
+export class PersonaDTO {
   //readonly nombre:string }Necesitamos que el frontEnd envíe la info al Back
   //este contrato se representa con una DTO.
+  //el id no se coloca!!!
   @IsString()
-  nombreApellido: string;
+  NombreApellido: string;
 
   @IsEmail()
-  email: string;
+  Email: string;
 
-  @IsOptional()
-  //@IsInt()
-  id?: number;
+//solo se declaran las relaciones que no retornan [] en la misma entidad
+ 
 }
 
 

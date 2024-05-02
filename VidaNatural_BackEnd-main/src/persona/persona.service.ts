@@ -1,71 +1,98 @@
-import { Injectable, NotFoundException, BadRequestException, ConflictException } from "@nestjs/common";
-import { InjectRepository } from '@nestjs/typeorm';
-import { FindOneOptions, Repository } from 'typeorm';
+import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
+import { FindManyOptions, FindOneOptions, Repository } from 'typeorm';
 import { Persona } from 'src/entities/persona.entity';
-import { HttpException, HttpStatus } from '@nestjs/common';
-import { PersonaDto } from "./persona.dto";
-
+import { PersonaDTO } from './persona.dto';
+import { InjectRepository } from '@nestjs/typeorm';
 @Injectable()
 export class PersonaService {
-  updatePersona(persona: PersonaDto): Persona | PromiseLike<Persona> {
-    throw new Error('Method not implemented.');
-  }
-  updatePersonById(id: number, PersonaDto: PersonaDto): Promise<void> {
-    throw new Error('Method not implemented.');
-  }
-  deletePersonaByID(id: number) {
-    throw new Error('Method not implemented.');
-  }
-  getPersonaById(id: number): any {
-    throw new Error('Method not implemented.');
-  }
-  getPersonas(): PersonaDto[] | PromiseLike<PersonaDto[]> {
-    throw new Error('Method not implemented.');
-  }
-  private personas: Persona[] = [];
-  constructor(
-    @InjectRepository(Persona)
-    private readonly personasRepository: Repository<Persona>
-  ) {}
-  
-  public async getAll(): Promise<Persona[]> {
-    return await this.personasRepository.find();
-  }
-  
-  public async getById(id: number): Promise<Persona> {
+  constructor(@InjectRepository(Persona) private personaRepository: Repository<Persona>) { }
+
+  async crearPersona(datos: PersonaDTO): Promise<Persona> {
+    const existePersona = await this.personaRepository.findOne({ where: { Email: datos.Email } });
+    if (existePersona) {
+      throw new HttpException(`La persona ${datos.NombreApellido} ya existe en la base de datos`, HttpStatus.CONFLICT);
+    }
     try {
-      const criterio: FindOneOptions = { where: { idPersona: id } };
-      const persona: Persona = await this.personasRepository.findOne(criterio);
-      if (persona) {
+      let persona: Persona;
+      if (datos.NombreApellido && datos.Email) {
+        persona = new Persona(datos.NombreApellido, datos.Email)
+        persona = await this.personaRepository.save(persona);//se accede al metodo  que trae el repository de TypeOrm
         return persona;
       } else {
-        throw new NotFoundException('La persona no fue encontrada');
+        throw new NotFoundException(`Algunos de los campos no está completo o falta algún caracter. Compruebe los datos ingresados e intente nuevamente`);
       }
+
+    } catch (error) {
+      throw new HttpException(`No se puedo crear la persona ${datos.NombreApellido}, intente nuevamente en unos segundos`, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+//trae todas las personas
+  async getPersona(): Promise<Persona[]> {
+    try {
+      let criterio: FindManyOptions = { relations: ['mensaje', 'donaciones'] };
+      const persona: Persona[] = await this.personaRepository.find(criterio);//se accede al metodo  que trae el repository de TypeOrm
+      if (persona) return persona;
+      throw new Error(`El fichero Persona aún está vacío. Por favor, primero ingrese una nueva carga de datos`);
     } catch (error) {
       throw new HttpException({
         status: HttpStatus.NOT_FOUND,
-        error: 'Se produjo un error al obtener la persona: ' + error.message,
+        error: `Se produjo un error al intentar obtener las personas. Compruebe los datos ingresados e intente nuevamente`
       }, HttpStatus.NOT_FOUND);
     }
   }
 
-  public async addPersona(personaDTO: PersonaDto): Promise<Persona> {
+
+  async getByIdPersona(id: number): Promise<Persona> {
     try {
-      const persona: Persona = await this.personasRepository.save(new Persona(
-        personaDTO.id, personaDTO.nombreApellido, personaDTO.email
-      ));
-      if (persona) {
-        return persona;
+      const criterio: FindOneOptions = { relations: ['mensaje', 'donaciones'], where: { idPersona: id } };
+      const persona = await this.personaRepository.findOne(criterio);//se accede al metodo  que trae el repository de TypeOrm
+      return persona;
+    } catch (error) {
+      throw new Error(`Error al buscar la persona con id ${id}.`);
+    }
+  }
+
+  async updatePersona(id: number, datos: PersonaDTO): Promise<Persona> {
+    try {
+      let persona = await this.getByIdPersona(id);
+      if (!persona) {
+        throw new HttpException(`No se encontró la persona con ID ${id}`,
+          HttpStatus.NOT_FOUND);
+      }
+
+      // Actualizar campos de la persona
+      persona.NombreApellido = datos.NombreApellido;
+      persona.Email = datos.Email;
+
+      // Guardar los cambios en la persona
+      return await this.personaRepository.save(persona);//se accede al metodo  que trae el repository de TypeOrm
+
+
+    } catch (error) {
+
+      throw new HttpException(`Error al actualizar la persona con ID ${id}: ${error.message}`, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  async deletePersona(id: number, datos: PersonaDTO): Promise<string> {
+    try {
+      const removePersona: Persona = await this.getByIdPersona(id);
+      if (!removePersona) {
+        return `La persona que desea eliminar no existe en la base de datos`
       } else {
-        throw new BadRequestException('Los datos no son válidos');
+        await this.personaRepository.remove(removePersona);//se accede al metodo  que trae el repository de TypeOrm
+        return `La persona ${removePersona.NombreApellido} ha sido eliminado correctamente de la base de edatos`
       }
     } catch (error) {
       throw new HttpException({
         status: HttpStatus.NOT_FOUND,
-        error: 'Se produjo un error al crear la persona: ' + error.message,
-      }, HttpStatus.NOT_FOUND);
+        error: `Error al intentar eliminar la persona  ${datos.NombreApellido} en la base de datos; ${error}`
+      },
+        HttpStatus.NOT_FOUND);
     }
   }
 }
+//metodos de TypeOrm Repository: save, create, remove, update entre otros. estos son los que utilizamos
+
 
 

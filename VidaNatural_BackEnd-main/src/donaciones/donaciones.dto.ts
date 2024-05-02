@@ -1,16 +1,12 @@
-import { IsInt, IsDate, IsOptional } from 'class-validator';
+import { IsInt, IsDate, IsOptional, IsNumber, IsString } from 'class-validator';
+import { Persona } from 'src/entities/persona.entity';
 
 export class DonacionesDto {
-  @IsInt()
-  idPersona: number;
+  @IsNumber()
+  monto: number;
 
-  @IsInt()
-  montoDonado: number;
-
-  @IsDate()
+  @IsString()
   fechaDonacion: Date;
 
-  @IsOptional()
-  @IsInt()
-  id?: number;
+persona:Persona;
 }
