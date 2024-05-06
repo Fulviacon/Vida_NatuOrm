@@ -19,7 +19,11 @@ export class PersonaController {
   async getPersonaById(@Param('id', new ParseIntPipe()) id: number): Promise<Persona> {
     const persona = await this.personaService.getByIdPersona(id);
     if (persona) return persona;
-   }
+    
+  
+}
+
+
 
 //crea una persona
   @Post()
