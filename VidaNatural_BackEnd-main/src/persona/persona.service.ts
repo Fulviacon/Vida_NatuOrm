@@ -81,7 +81,7 @@ export class PersonaService {
         return `La persona que desea eliminar no existe en la base de datos`
       } else {
         await this.personaRepository.remove(removePersona);//se accede al metodo  que trae el repository de TypeOrm
-        return `La persona ${removePersona.NombreApellido} ha sido eliminado correctamente de la base de edatos`
+        return `La persona ${removePersona.NombreApellido} ha sido eliminado correctamente de la base de datos`
       }
     } catch (error) {
       throw new HttpException({
