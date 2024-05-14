@@ -11,6 +11,8 @@ import { Persona } from './entities/persona.entity';
 import { DonacionesModule } from './donaciones/donaciones.module';
 import { Donaciones } from './entities/donaciones.entity';
 import { Mensaje } from './entities/mensajes.entity';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 
 @Module ({
   imports: [
@@ -26,6 +28,8 @@ import { Mensaje } from './entities/mensajes.entity';
         }),
     PersonaModule, DonacionesModule,
     MensajeModule,
+    AuthModule,
+    UserModule,
     
   ],
   controllers: [AppController],
