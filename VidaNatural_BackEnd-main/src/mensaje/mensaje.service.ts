@@ -83,7 +83,7 @@ export class MensajeService {
         return `El mensaje que desea eliminar no existe en la base de datos`
       } else {
         await this.mensajesRepository.remove(mensaje);
-        return `El mensaje ha sido eliminado correctamente de la base de edatos`
+        return `El mensaje ha sido eliminado correctamente de la base de datos`
       }
     } catch (error) {
       throw new HttpException({
