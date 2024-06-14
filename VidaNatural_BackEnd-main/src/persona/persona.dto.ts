@@ -6,10 +6,13 @@ export class PersonaDTO {
   //este contrato se representa con una DTO.
   //el id no se coloca!!!
   @IsString()
-  NombreApellido: string;
+  nombreApellido: string;
 
   @IsEmail()
-  Email: string;
+  email: string;
+
+  @IsEmail()
+  password: string;
 
 //solo se declaran las relaciones que no retornan [] en la misma entidad
  
