@@ -8,11 +8,14 @@ export class Persona {
     idPersona: number;
 
     @Column()
-    NombreApellido: string;
+    nombreApellido: string;
     
     @Column()
-    Email: string;
+    email: string;
 
+    @Column()
+    password: string;
+    
     @OneToMany(() => Mensaje, mensaje => mensaje.persona)
     mensaje: Mensaje[];
 
@@ -20,8 +23,9 @@ export class Persona {
     donaciones: Donaciones[];
 
     //en el constructor no va el id
-    constructor(NombreApellido: string, Email: string) {
-        this.NombreApellido = NombreApellido;
-        this.Email = Email;
+    constructor(nombreApellido: string, email: string, password: string) {
+        this.nombreApellido = nombreApellido;
+        this.email = email;
+        this.password = password;
     }
 }

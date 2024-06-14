@@ -8,14 +8,14 @@ export class PersonaService {
   constructor(@InjectRepository(Persona) private personaRepository: Repository<Persona>) { }
 
   async crearPersona(datos: PersonaDTO): Promise<Persona> {
-    const existePersona = await this.personaRepository.findOne({ where: { Email: datos.Email } });
+    const existePersona = await this.personaRepository.findOne({ where: { email: datos.email } });
     if (existePersona) {
-      throw new HttpException(`La persona ${datos.NombreApellido} ya existe en la base de datos`, HttpStatus.CONFLICT);
+      throw new HttpException(`La persona ${datos.nombreApellido} ya existe en la base de datos`, HttpStatus.CONFLICT);
     }
     try {
       let persona: Persona;
-      if (datos.NombreApellido && datos.Email) {
-        persona = new Persona(datos.NombreApellido, datos.Email)
+      if (datos.nombreApellido && datos.email) {
+        persona = new Persona(datos.nombreApellido, datos.email, datos.password)
         persona = await this.personaRepository.save(persona);//se accede al metodo  que trae el repository de TypeOrm
         return persona;
       } else {
@@ -23,7 +23,7 @@ export class PersonaService {
       }
 
     } catch (error) {
-      throw new HttpException(`No se puedo crear la persona ${datos.NombreApellido}, intente nuevamente en unos segundos`, HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(`No se puedo crear la persona ${datos.nombreApellido}, intente nuevamente en unos segundos`, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 //trae todas las personas
@@ -61,8 +61,8 @@ export class PersonaService {
       }
 
       // Actualizar campos de la persona
-      persona.NombreApellido = datos.NombreApellido;
-      persona.Email = datos.Email;
+      persona.nombreApellido = datos.nombreApellido;
+      persona.email = datos.email;
 
       // Guardar los cambios en la persona
       return await this.personaRepository.save(persona);//se accede al metodo  que trae el repository de TypeOrm
@@ -81,12 +81,12 @@ export class PersonaService {
         return `La persona que desea eliminar no existe en la base de datos`
       } else {
         await this.personaRepository.remove(removePersona);//se accede al metodo  que trae el repository de TypeOrm
-        return `La persona ${removePersona.NombreApellido} ha sido eliminado correctamente de la base de datos`
+        return `La persona ${removePersona.nombreApellido} ha sido eliminado correctamente de la base de datos`
       }
     } catch (error) {
       throw new HttpException({
         status: HttpStatus.NOT_FOUND,
-        error: `Error al intentar eliminar la persona  ${datos.NombreApellido} en la base de datos; ${error}`
+        error: `Error al intentar eliminar la persona  ${datos.nombreApellido} en la base de datos; ${error}`
       },
         HttpStatus.NOT_FOUND);
     }
