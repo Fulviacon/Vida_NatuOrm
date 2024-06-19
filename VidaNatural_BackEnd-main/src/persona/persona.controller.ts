@@ -4,7 +4,7 @@ import { Persona } from 'src/entities/persona.entity';
 import { PersonaService } from './persona.service';
 
 
-@Controller('personas')
+@Controller('persona')
 export class PersonaController {
   constructor(private readonly personaService: PersonaService) {}
   //trae todas las personas
