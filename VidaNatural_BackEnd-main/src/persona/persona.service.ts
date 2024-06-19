@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
-import { FindManyOptions, FindOneOptions, Repository } from 'typeorm';
+import { FindManyOptions, FindOneOptions, FindOptionsUtils, Repository } from 'typeorm';
 import { Persona } from 'src/entities/persona.entity';
 import { PersonaDTO } from './persona.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -52,6 +52,11 @@ export class PersonaService {
     }
   }
 
+  async findUser(email: string): Promise<Persona> {
+    const criterio: FindOneOptions = {where: {Email: email}};
+    const persona = await this.personaRepository.findOne (criterio);
+    return persona;
+  }
   async updatePersona(id: number, datos: PersonaDTO): Promise<Persona> {
     try {
       let persona = await this.getByIdPersona(id);
