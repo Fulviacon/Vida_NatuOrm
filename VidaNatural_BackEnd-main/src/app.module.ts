@@ -12,6 +12,7 @@ import { DonacionesModule } from './donaciones/donaciones.module';
 import { Donaciones } from './entities/donaciones.entity';
 import { Mensaje } from './entities/mensajes.entity';
 import { URL } from "url";
+import { AuthModule } from './auth/auth.module';
 
 const dbUrl = new URL("postgresql://vida-natural2024:REVEAL_PASSWORD@vida-natural-7555.g8z.gcp-us-east1.cockroachlabs.cloud:26257/vida_natural?sslmode=verify-full");
 const routingId = dbUrl.searchParams.get("options");
