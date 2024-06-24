@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get} from '@nestjs/common';
 import { UserService } from './user/user.service';
+
 
 @Controller('user')
 export class UserController {
@@ -10,3 +11,4 @@ export class UserController {
     return this.userService.findAll();
   }
 }
+export class AppController {}
