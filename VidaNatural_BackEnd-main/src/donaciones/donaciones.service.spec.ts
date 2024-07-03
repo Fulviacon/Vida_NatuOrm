@@ -23,3 +23,9 @@ describe('DonacionesService', () => {
     expect(service).toBeDefined();
   });
 });
+/* El propósito principal de este archivo es proporcionar un conjunto de pruebas 
+que verifiquen el comportamiento y la funcionalidad del servicio DonacionesService. Estas pruebas aseguran que:
+El servicio se comporte como se espera en diversas condiciones.
+Los métodos del servicio devuelvan los resultados esperados.
+Las dependencias del servicio se manejen correctamente.
+Cualquier cambio en el código que introduzca errores sea detectado de manera temprana.*/

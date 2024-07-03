@@ -11,3 +11,6 @@ export class AuthController {
     return this.authService.login(loginDto.email, loginDto.password);
   }
 }
+/*El propósito de este controlador AuthController es manejar las solicitudes de autenticación en la aplicación.
+ En particular, el método login maneja las solicitudes POST a la ruta auth/login, 
+ valida los datos de inicio de sesión utilizando LoginDto, y luego delega la autenticación al AuthService.*/

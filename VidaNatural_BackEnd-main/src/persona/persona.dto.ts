@@ -11,7 +11,7 @@ export class PersonaDTO {
   @IsEmail()
   email: string;
 
-  @IsEmail()
+  @IsString()
   password: string;
 
 //solo se declaran las relaciones que no retornan [] en la misma entidad
