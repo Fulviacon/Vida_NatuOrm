@@ -24,7 +24,6 @@ export class PersonaController {
 }
 
 
-
 //crea una persona
   @Post()
   @HttpCode(201)
