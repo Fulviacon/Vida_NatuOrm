@@ -11,7 +11,11 @@ export class PersonaDTO {
   @IsEmail()
   email: string;
 
+<<<<<<< HEAD
   @IsString()
+=======
+  @IsEmail()
+>>>>>>> laura
   password: string;
 
 //solo se declaran las relaciones que no retornan [] en la misma entidad
