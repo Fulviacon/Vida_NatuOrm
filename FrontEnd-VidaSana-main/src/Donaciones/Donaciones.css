@@ -1,0 +1,165 @@
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(1, 19, 0);
+}
+
+/*Estilos Form*/
+
+.form {
+  border: 5px solid rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25rem;
+  align-self: center;
+  border-radius: 20px;
+  margin-top: 80px;
+  padding: 0 40px 40px 40px;
+  margin-bottom: 50px;
+  background-color: #FFF;
+}
+
+
+.form label {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.input_name,
+.input_donacion,
+.input_mensaje {
+  margin: 15px 0px;
+  padding: 10px;
+  height: 40px;
+  width: 17rem;
+  font-size: 20px;
+  background-color: #EAEAEA;
+  color: black;
+
+  border-radius: 6px;
+
+}
+
+.submit {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: rgb(50, 138, 0);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  transition: all .50s ease;
+  cursor: pointer;
+}
+
+
+/*Estilos Card*/
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1200px;
+  padding: 10px;
+}
+
+.card {
+  border: 5px solid white;
+  margin: 40px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 550px;
+  text-align: center;
+  background-color: #4f565e;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 1.5rem;
+}
+
+.card:hover {
+  box-shadow: 8px 12px 10px 8px rgba(0, 0, 0, 0.2);
+}
+
+.imagen {
+  border: 10px solid whitesmoke;
+  zoom: 1.2;
+  border-radius: 100%;
+}
+
+.h1__donaciones {
+  text-align: center;
+  margin: 50px 0;
+  font-weight: bold;
+  color: black;
+}
+
+.multiplicador_donaciones {
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+  color: #000;
+  font-size: 2em;
+  text-align: center;
+  margin: 10px;
+  border: 2px solid #ccc;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+
+.button {
+  font-family: monospace;
+  margin: 5px;
+  font-weight: bold;
+  font-size: 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 160px;
+  height: 60px;
+}
+
+
+.labelMensaje,
+.labelNombreApellido,
+.labelDonacion {
+  color: black;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+.button.eliminar {
+  background-color: rgb(255, 80, 80);
+  color: black;
+  border: 2px solid black;
+}
+
+.button.editar {
+  background-color: #C0D7BB;
+  color: black;
+  border: 2px solid black;
+}
+
+.h2,
+.h3,
+.h4 {
+  margin: 5px 0;
+  scale: 1.2;
+}

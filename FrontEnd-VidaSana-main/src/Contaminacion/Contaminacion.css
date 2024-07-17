@@ -1,0 +1,48 @@
+.informacion {
+  background-color: #011300;
+  padding: 70px 17% 60px;
+}
+
+.titulo-principal {
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 50px 0;
+  margin-bottom: 20px;
+  text-align: start;
+}
+
+
+.imagen-problema {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tarjetaInfo {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  gap: 9rem;
+  padding: 150px 0 200px 0;
+}
+
+.tarjeta-text h2 {
+  /*font-size: ;*/
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 25px;
+}
+
+.tarjeta-text p {
+  /*font-size: ;*/
+  font-weight: 500;
+  line-height: 30px;
+  color: #ffffffce;
+  margin-bottom: 35px;
+}
+
+.tarjeta-Img img {
+  width: 100%;
+  height: 400px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.884);
+}

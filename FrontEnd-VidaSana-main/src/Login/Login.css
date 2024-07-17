@@ -1,0 +1,128 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+.login{
+    width: 100%;
+    padding: 20px;
+    margin: auto;
+    margin-top: 100px;
+    margin-bottom: 200px;
+}
+
+.contenedor-todo{
+    width: 100%;
+    max-width: 780px;
+    margin: auto;
+    position: relative;
+    
+}
+
+.caja-trasera{
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    background-color: green;
+}
+
+.caja-trasera div{
+    margin: 100px 40px;
+    color: white;
+    transition: all 500ms;
+}
+
+.caja-trasera div p,
+.caja-trasera div button{
+    margin-top: 30px;
+}
+
+.caja-trasera div h3{
+    font-weight: 400;
+    font-size: 26px;
+    width: 280px;
+}
+
+.caja-trasera button{
+    padding: 10px 40px;
+    border: 2px solid #fff;
+    background-color: transparent;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+    outline: none;
+    transition: all 300ms;
+}
+
+.caja-trasera button:hover{
+    background-color: #fff;
+    color: green;
+    border: 2px solid #fff;
+}
+
+.contenedor-login-register{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 380px;
+    position: relative;
+    top: -212px;
+    transition: left 500ms cubic-bezier(0.175, 0.885, 0.320, 1.27);
+}
+
+.contenedor-login-register form{
+    width: 100%;
+    padding: 80px 20px;
+    background-color: white;
+    color: black;
+    position: absolute;
+    
+}
+
+
+.contenedor-login-register form h2{
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: black;
+}
+
+
+.contenedor-login-register form input{
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.068);
+    font-size: 16px;
+    outline: none;
+}
+
+
+.contenedor-login-register form button{
+    padding: 10px 40px;
+    margin-top: 40px;
+    border: none;
+    font-size: 14px;
+    background-color: green;
+    color: white;
+    cursor: pointer;
+}
+
+.formulario-login{
+    opacity: 1;
+    display: block;
+    height: 450px;
+    
+}
+
+.formulario-register{
+    display: none;
+  
+    left: 10px;
+}
