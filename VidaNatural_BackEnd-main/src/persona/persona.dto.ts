@@ -1,4 +1,11 @@
-import { IsString, IsEmail } from 'class-validator';
+export class PersonaDTO {
+  nombreApellido: string;
+  email: string;
+  password: string;
+}
+
+
+/*import { IsString, IsEmail } from 'class-validator';
 
 
 export class PersonaDTO {
@@ -16,7 +23,7 @@ export class PersonaDTO {
 
 //solo se declaran las relaciones que no retornan [] en la misma entidad
  
-}
+}*/
 
 
 

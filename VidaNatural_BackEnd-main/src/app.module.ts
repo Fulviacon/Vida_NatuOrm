@@ -1,19 +1,29 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { PersonaModule } from './persona/persona.module';
-import { AppController} from './app.controller';
+import { MensajeModule } from './mensaje/mensaje.module';
+import { DonacionesModule } from './donaciones/donaciones.module';
+import { AuthModule } from './auth/auth.module';
+
+import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-import { MensajeModule } from './mensaje/mensaje.module';
-
 import { Persona } from './entities/persona.entity';
-import { DonacionesModule } from './donaciones/donaciones.module';
 import { Donaciones } from './entities/donaciones.entity';
 import { Mensaje } from './entities/mensajes.entity';
-import { URL } from "url";
-import { AuthModule } from './auth/auth.module';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+
+import * as dotenv from 'dotenv';
+dotenv.config();
+
+console.log({
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+});
 
 @Module({
   imports: [
@@ -29,17 +39,22 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         username: configService.get<string>('DB_USER'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
-        ssl:true,
-        entities: [Persona,Donaciones,Mensaje],//__dirname + "/entity/*{.js,.ts}"
-      synchronize:true,
+        ssl: true,
+        entities: [Persona, Donaciones, Mensaje],
+        synchronize: true,
       }),
       inject: [ConfigService],
     }),
+    PersonaModule,
+    MensajeModule,
+    DonacionesModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
+
 
 
 
