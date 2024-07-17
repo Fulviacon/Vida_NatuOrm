@@ -31,7 +31,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         database: configService.get<string>('DB_NAME'),
         ssl:true,
         entities: [Persona,Donaciones,Mensaje],//__dirname + "/entity/*{.js,.ts}"
-      synchronize:false,
+      synchronize:true,
       }),
       inject: [ConfigService],
     }),
